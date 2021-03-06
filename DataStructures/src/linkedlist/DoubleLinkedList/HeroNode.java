@@ -1,13 +1,13 @@
-package linkedlist;
+package linkedlist.DoubleLinkedList;
 
-public class HeroNode2 {
+public class HeroNode {
     private int no;
     private String name;
     private String nickname;
-    private HeroNode2 pre;
-    private HeroNode2 next;
+    private HeroNode pre;
+    private HeroNode next;
 
-    public HeroNode2(int no, String name, String nickname) {
+    public HeroNode(int no, String name, String nickname) {
         this.no = no;
         this.name = name;
         this.nickname = nickname;
@@ -46,19 +46,19 @@ public class HeroNode2 {
         this.nickname = nickname;
     }
 
-    public HeroNode2 getPre() {
+    public HeroNode getPre() {
         return pre;
     }
 
-    public void setPre(HeroNode2 pre) {
+    public void setPre(HeroNode pre) {
         this.pre = pre;
     }
 
-    public HeroNode2 getNext() {
+    public HeroNode getNext() {
         return next;
     }
 
-    public void setNext(HeroNode2 next) {
+    public void setNext(HeroNode next) {
         this.next = next;
     }
 }

@@ -1,7 +1,7 @@
-package linkedlist;
+package linkedlist.DoubleLinkedList;
 
 public class DoubleLinkedList {
-    HeroNode2 head = new HeroNode2(0,"","");
+    HeroNode head = new HeroNode(0,"","");
 
     //遍历双向链表
     public void showLinkedList() {
@@ -9,7 +9,7 @@ public class DoubleLinkedList {
         if (head.getNext() == null) {
             System.out.println("链表为空");
         }
-        HeroNode2 temp = head.getNext();
+        HeroNode temp = head.getNext();
         while (temp != null) {
             System.out.println(temp);
             temp = temp.getNext();
@@ -17,8 +17,8 @@ public class DoubleLinkedList {
     }
 
     //添加节点在尾部
-    public void addNode(HeroNode2 heroNode) {
-        HeroNode2 temp = head;
+    public void addNode(HeroNode heroNode) {
+        HeroNode temp = head;
         while (temp.getNext() != null) {
             //如果辅助变量的next为空，则插入节点，不为空则寻找下一个节点
             temp = temp.getNext();
@@ -28,8 +28,8 @@ public class DoubleLinkedList {
     }
 
     //根据编号插入节点
-    public void addNodeByNo(HeroNode2 heroNode) {
-        HeroNode2 temp = head;
+    public void addNodeByNo(HeroNode heroNode) {
+        HeroNode temp = head;
         while (temp.getNext() != null) {
             if (temp.getNext().getNo() > heroNode.getNo()) {
                 break;
@@ -49,11 +49,11 @@ public class DoubleLinkedList {
     }
 
     //根据编号修改节点信息
-    public void changeNode(HeroNode2 heroNode) {
+    public void changeNode(HeroNode heroNode) {
         if (head.getNext() == null) {
             System.out.println("链表为空");
         }
-        HeroNode2 temp = head;
+        HeroNode temp = head;
         while (temp != null) {
             if (temp.getNo() == heroNode.getNo()) {
                 temp.setName(heroNode.getName());
@@ -70,7 +70,7 @@ public class DoubleLinkedList {
         if (head.getNext() == null) {
             System.out.println("链表为空");
         }
-        HeroNode2 temp = head;
+        HeroNode temp = head;
         while (temp != null) {
             if (temp.getNo() == no) {
                 temp.getPre().setNext(temp.getNext());
