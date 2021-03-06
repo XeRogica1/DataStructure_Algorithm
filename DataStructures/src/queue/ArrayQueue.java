@@ -2,8 +2,8 @@ package queue;
 
 public class ArrayQueue {
     private int maxSize;//最大容量
-    private int front;//队列首
-    private int rear;//队列尾
+    private int front;//队列首，指向队列第一个元素前一个位置
+    private int rear;//队列尾，指向最后一个元素
     private int[] arr;//数组模拟队列
 
     //构造队列
