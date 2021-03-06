@@ -6,7 +6,7 @@ public class SparseArray {
         int[][] chessArr1 = new int[11][11];
         chessArr1[1][2] = 1;
         chessArr1[2][3] = 2;
-        //循环输入原始二维数组
+        //循环输出原始二维数组
         System.out.println("原始二维数组");
         for (int[] row:chessArr1) {
             for (int data:row) {
