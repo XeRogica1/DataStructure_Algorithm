@@ -1,4 +1,4 @@
-package linkedlist;
+package linkedlist.SingleLinkedList;
 
 public class SingleLinkedList {
     //初始化头节点

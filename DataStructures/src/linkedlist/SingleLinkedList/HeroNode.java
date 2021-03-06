@@ -1,4 +1,4 @@
-package linkedlist;
+package linkedlist.SingleLinkedList;
 //单链表节点
 public class HeroNode {
     private int no;
