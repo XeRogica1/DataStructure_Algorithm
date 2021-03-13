@@ -26,14 +26,14 @@ public class HuffmanCodeTest {
         System.out.println(Arrays.toString(compressedBytes));
 */
         //封装后
-        byte[] bytes = HuffmanCode.huffmanCompress(str);
+        byte[] bytes = HuffmanCode.huffmanCompress(strBytes);
         System.out.println(str);
         System.out.println("压缩为");
         System.out.println(Arrays.toString(bytes));
 
         //解码
         System.out.println("重新解码");
-        String resStr = HuffmanCode.huffmanDecompress(bytes, codeMap);
+        String resStr = new String(HuffmanCode.huffmanDecompress(bytes, codeMap));
         System.out.println(resStr);
     }
 }

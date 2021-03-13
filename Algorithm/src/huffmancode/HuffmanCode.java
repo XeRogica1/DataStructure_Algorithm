@@ -1,5 +1,6 @@
 package huffmancode;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,9 +83,7 @@ public class HuffmanCode {
     }
 
     //封装将字符串转换成压缩后的数组
-    public static byte[] huffmanCompress(String str) {
-        //字符串转为数组
-        byte[] bytes = str.getBytes();
+    public static byte[] huffmanCompress(byte[] bytes) {
         //数组转为赫夫曼节点集合
         List<HuffmanNode> nodeList = HuffmanCodeTree.getNodes(bytes);
         //通过赫夫曼节点集合构建赫夫曼树
@@ -98,6 +97,7 @@ public class HuffmanCode {
 
     /**
      * 将byte数组转换为二进制字符串
+     *
      * @param b    要转换的byte
      * @param flag 是否需要补高位，最后一个byte数不需要补高位
      * @return 二进制字符串
@@ -112,7 +112,7 @@ public class HuffmanCode {
         }
         //返回补码
         String str = Integer.toBinaryString(temp);
-        if (flag||temp<0) {
+        if (flag || temp < 0) {
             return str.substring(str.length() - 8);
         } else {
             return str;
@@ -120,7 +120,7 @@ public class HuffmanCode {
     }
 
     //解码，将压缩后的byte数组转换为原来的字符串
-    public static String huffmanDecompress(byte[] bytes, Map<Byte, String> codeMap) {
+    public static byte[] huffmanDecompress(byte[] bytes, Map<Byte, String> codeMap) {
         //拼接每一个byte数转换的二进制字符串
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
@@ -138,7 +138,7 @@ public class HuffmanCode {
         //创建集合存放byte
         List<Byte> byteList = new ArrayList<>();
         //i是扫描二进制字符串的指针
-        for (int i = 0; i < stringBuilder.length();) {
+        for (int i = 0; i < stringBuilder.length(); ) {
             int count = 1;
             boolean flag = true;
             Byte b = null;
@@ -166,17 +166,56 @@ public class HuffmanCode {
         //将byte集合转换为数组
         byte[] resBytes = new byte[byteList.size()];
         for (int i = 0; i < byteList.size(); i++) {
-            resBytes[i]=byteList.get(i);
+            resBytes[i] = byteList.get(i);
         }
-        return new String(resBytes);
+        return resBytes;
     }
 
     /**
      * 压缩文件
-     * @param srcFile 待压缩文件的全路径
+     *
+     * @param srcFile  待压缩文件的全路径
      * @param destFile 压缩文件的存储路径
      */
-    public static void compressFile(String srcFile,String destFile){
+    public static void compressFile(String srcFile, String destFile) {
+        //自动关闭IO流
+        try (FileInputStream fis = new FileInputStream(srcFile);
+             FileOutputStream fos = new FileOutputStream(destFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            //读取文件
+            byte[] b = new byte[fis.available()];
+            fis.read(b);
+            //对源文件进行压缩
+            byte[] compressedFile = huffmanCompress(b);
+            //把压缩后的数组与赫夫曼编码写入压缩文件中
+            oos.writeObject(compressedFile);
+            oos.writeObject(codeMap);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
+    /**
+     * 将文件解压缩
+     *
+     * @param srcFile  压缩文件的路径
+     * @param destFile 解压缩后文件的路径
+     */
+    public static void decompresseFile(String srcFile, String destFile) {
+        try (FileInputStream fis = new FileInputStream(srcFile);
+             FileOutputStream fos = new FileOutputStream(destFile);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            //读取数组文件
+            byte[] huffmanBytes = (byte[]) ois.readObject();
+            //读取编码表
+            Map<Byte,String> codeMap = (Map<Byte, String>) ois.readObject();
+            //解码
+            byte[] b= huffmanDecompress(huffmanBytes,codeMap);
+            fos.write(b);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
