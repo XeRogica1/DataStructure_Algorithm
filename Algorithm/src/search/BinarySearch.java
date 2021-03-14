@@ -11,6 +11,9 @@ public class BinarySearch {
         System.out.println(num + "的下标是" + index);
         List indexList = binarySearchAll(arr, num, 0, arr.length);
         System.out.println(indexList);
+        num = 53;
+        int i = binarySearchNoRecursion(arr, num);
+        System.out.println(num + "的下标是" + i);
     }
 
 
@@ -77,5 +80,24 @@ public class BinarySearch {
             }
             return indexList;
         }
+    }
+
+    //二分查找非递归方法
+    public static int binarySearchNoRecursion(int[] arr, int num) {
+        int start = 0;
+        int end = arr.length;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (arr[mid] == num) {
+                return mid;
+            } else if (arr[mid] > num) {
+                //向左查找
+                end = mid - 1;
+            } else {
+                //向右查找
+                start = mid + 1;
+            }
+        }
+        return -1;
     }
 }
