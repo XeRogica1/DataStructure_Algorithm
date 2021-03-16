@@ -21,20 +21,20 @@ public class PrimAlgorithm {
     A-C 7       A-C 7
 */
 
-        char[]data = {'A','B','C','D','E','F','G'};
+        char[] data = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
         int vertexNum = data.length;
-        int[][]weight = {
-                {100,5,7,100,100,100,2},
-                {5,100,100,9,100,100,3},
-                {7,100,100,100,8,100,100},
-                {100,9,100,100,100,4,100},
-                {100,100,8,100,100,5,4},
-                {100,100,100,4,5,100,6},
-                {2,3,100,100,4,6,100}};
+        int[][] weight = {
+                {100, 5, 7, 100, 100, 100, 2},
+                {5, 100, 100, 9, 100, 100, 3},
+                {7, 100, 100, 100, 8, 100, 100},
+                {100, 9, 100, 100, 100, 4, 100},
+                {100, 100, 8, 100, 100, 5, 4},
+                {100, 100, 100, 4, 5, 100, 6},
+                {2, 3, 100, 100, 4, 6, 100}};
         PGraph graph = new PGraph(vertexNum);
         MiniTree miniTree = new MiniTree();
-        miniTree.createGraph(graph,vertexNum,data,weight);
+        miniTree.createGraph(graph, vertexNum, data, weight);
         miniTree.showGraph(graph);
-        miniTree.prim(graph,5);
+        miniTree.prim(graph, 5);
     }
 }
